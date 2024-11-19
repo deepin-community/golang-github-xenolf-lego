@@ -1,0 +1,3 @@
+skip_tests_with_network_access.patch
+drop_providers.patch
+consistency.patch

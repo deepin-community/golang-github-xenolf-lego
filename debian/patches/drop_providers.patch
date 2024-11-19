@@ -1,0 +1,28 @@
+Last-Update: 2021-01-19, 2023-01-26
+Forwarded: not-needed
+Author: Dmitry Smirnov <onlyjob@debian.org>
+Description: disable providers with non-satisfy-able dependencies
+
+--- a/cmd/setup_challenges.go
++++ b/cmd/setup_challenges.go
+@@ -12,7 +12,6 @@
+ 	"github.com/go-acme/lego/v4/lego"
+ 	"github.com/go-acme/lego/v4/log"
+ 	"github.com/go-acme/lego/v4/providers/dns"
+-	"github.com/go-acme/lego/v4/providers/http/memcached"
+ 	"github.com/go-acme/lego/v4/providers/http/webroot"
+ 	"github.com/urfave/cli/v2"
+ )
+@@ -48,12 +47,6 @@
+ 		if err != nil {
+ 			log.Fatal(err)
+ 		}
+-		return ps
+-	case ctx.IsSet("http.memcached-host"):
+-		ps, err := memcached.NewMemcachedProvider(ctx.StringSlice("http.memcached-host"))
+-		if err != nil {
+-			log.Fatal(err)
+-		}
+ 		return ps
+ 	case ctx.IsSet("http.port"):
+ 		iface := ctx.String("http.port")

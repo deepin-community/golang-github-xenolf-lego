@@ -1,0 +1,23 @@
+## Disable networking tests:
+acme/dns_challenge_test.go
+challenge/dns01/dns_challenge_manual_test.go
+challenge/dns01/nameserver_test.go
+challenge/dns01/precheck_test.go
+platform/wait/wait_test.go
+providers/dns/cloudns/internal/client_test.go
+providers/dns/cloudxns/internal/client_test.go
+providers/dns/conoha/conoha_test.go
+providers/dns/digitalocean/digitalocean_test.go
+providers/dns/dns_providers_test.go
+providers/dns/gcloud/googlecloud_test.go
+providers/dns/googlecloud/googlecloud_test.go
+providers/dns/httpreq/*_test.go
+providers/dns/otc/otc_test.go
+providers/dns/pdns/pdns_test.go
+providers/dns/rackspace/rackspace_test.go
+providers/dns/rfc2136/rfc2136_test.go
+providers/dns/route53/fixtures_test.go
+providers/dns/route53/route53_integration_test.go
+providers/dns/route53/route53_test.go
+providers/dns/versio/versio_test.go
+providers/dns/zoneee/*_test.go
