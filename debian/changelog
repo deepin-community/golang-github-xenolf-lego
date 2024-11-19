@@ -1,5 +1,178 @@
-template-repository (1.0-1) unstable; urgency=medium
+golang-github-xenolf-lego (4.9.1-2) unstable; urgency=medium
 
-  * Initial release
+  * Team upload.
+  * Add tzdata to Build-Depends. Closes: #1027374.
 
- -- Tsic404 <liuheng@deepin.org>  Sat, 28 Jan 2023 13:46:49 +0800
+ -- Santiago Vila <sanvila@debian.org>  Tue, 31 Oct 2023 23:45:00 +0100
+
+golang-github-xenolf-lego (4.9.1-1) unstable; urgency=medium
+
+  * Team upload.
+  * New upstream version 4.9.1 (Closes: #992492)
+  * Update versioned dependencies as per go.mod (as much as currently possible)
+  * Use dh-sequence-golang instead of dh-golang and --with=golang
+  * Bump Standards-Version to 4.6.2 (no change)
+  * Mark library package with "Multi-Arch: foreign"
+  * Replace Built-Using field with Static-Built-Using
+  * debian/rules: Add newly added DNS providers to the nodns list for now
+    until their dependencies are packaged for Debian.  The currently disabled
+    DNS providers are:
+      acmedns alidns auroradns azure bindman civo cloudflare designate
+      dnsimple dnspod exoscale fastdns freemyip ibmcloud iij iijdpf infoblox
+      linode linodev4 liquidweb namedotcom namesilo ns1 oraclecloud porkbun
+      sakuracloud scaleway tencentcloud transip vegadns vinyldns vkcloud
+      yandexcloud (See #968964)
+  * Remove previously backported patches:
+    - vultr-Update-to-govultr-v2-API-1302.patch
+    - Fix-TestPEMEncode-on-Go-1.18.patch
+  * Refresh patches, expanding coverage of skip_tests_with_network_access.patch
+    which hopefully fixes FTBFS flaky tests (Closes: #1017651)
+  * debian/copyright: Update Source URL to https://github.com/go-acme/lego
+  * debian/copyright: Remove unneeded "Files-Excluded: vendor" field
+  * debian/gbp.conf: Re-merge upstream files from master
+  * debian/gbp.conf: Set debian-branch to debian/sid for DEP-14 conformance
+
+ -- Anthony Fok <foka@debian.org>  Thu, 26 Jan 2023 03:25:07 -0700
+
+golang-github-xenolf-lego (4.1.3-5) unstable; urgency=medium
+
+  * Team upload
+
+  [ William 'jawn-smith' Wilson ]
+  * append patch to skip even more tests which need network access
+
+  [ Benjamin Drung ]
+  * vultr: Update to govultr v2 API
+  * Fix TestPEMEncode on Go 1.18
+
+ -- Benjamin Drung <bdrung@debian.org>  Mon, 12 Dec 2022 12:18:37 +0100
+
+golang-github-xenolf-lego (4.1.3-4) unstable; urgency=medium
+
+  * Team upload
+  * Replace golang-github-codegangsta-cli-dev with
+    golang-github-urfave-cli-dev
+  * Fix uscan watch file
+  * Update maintainer address to team+pkg-go@tracker.debian.org
+
+ -- Shengjing Zhu <zhsj@debian.org>  Mon, 22 Aug 2022 00:16:35 +0800
+
+golang-github-xenolf-lego (4.1.3-3) unstable; urgency=medium
+
+  * add patch to skip tests which need network access (Closes: #993713)
+
+ -- Félix Sipma <felix@debian.org>  Fri, 10 Sep 2021 11:42:24 +0200
+
+golang-github-xenolf-lego (4.1.3-2) unstable; urgency=medium
+
+  * put the same B-D for golang-github-go-acme-lego and
+    golang-github-go-acme-lego-dev
+
+ -- Félix Sipma <felix@debian.org>  Sun, 05 Sep 2021 11:16:18 +0200
+
+golang-github-xenolf-lego (4.1.3-1) experimental; urgency=medium
+
+  * Team Upload
+
+  [ Félix Sipma ]
+  * New upstream release, closes: #974866
+  * update BuildDepends:
+    - bump golang-github-cenkalti-backoff-dev to >= 4.1.0
+    - add golang-github-google-go-querystring-dev
+    - add golang-github-pquerna-otp-dev
+    - add golang-github-akamai-akamaiopen-edgegrid-golang-dev
+    - add golang-github-nrdcg-desec-dev
+  * rebase consistency.patch and drop_providers.patch
+  * remove fix-build-nrdcg-goinwx-0.8.patch (not needed anymore)
+  * add providers/**/fixtures/* files to test_data
+
+ -- Reinhard Tartler <siretart@tauware.de>  Wed, 17 Feb 2021 07:13:19 -0500
+
+golang-github-xenolf-lego (3.2.0-3) unstable; urgency=medium
+
+  * Team upload.
+
+  [ Debian Janitor ]
+  * Set upstream metadata fields: Bug-Database, Bug-Submit, Repository,
+    Repository-Browse.
+
+  [ Arnaud Rebillout ]
+  * Fix FTBFS against nrdcg-goinwx-dev 0.8 (Closes: #975789).
+  * Section = golang for dev package, = admin for binary package.
+  * Debhelper compat = 13.
+  * Rules-Requires-Root = no.
+  * Standards-Version = 4.5.0.
+  * Add debian/not-installed (due to dh compat 13).
+
+ -- Arnaud Rebillout <elboulangero@gmail.com>  Mon, 11 Jan 2021 16:21:31 +0700
+
+golang-github-xenolf-lego (3.2.0-2) unstable; urgency=medium
+
+  * Disabled some unreliable tests (Closes: #954577).
+
+ -- Dmitry Smirnov <onlyjob@debian.org>  Fri, 10 Apr 2020 13:00:52 +1000
+
+golang-github-xenolf-lego (3.2.0-1) unstable; urgency=medium
+
+  * New upstream release.
+  * (Build-)Depends:
+    = golang-github-cenkalti-backoff-dev (>= 3.1.1~)
+
+ -- Dmitry Smirnov <onlyjob@debian.org>  Thu, 26 Dec 2019 07:19:14 +1100
+
+golang-github-xenolf-lego (2.7.2+dfsg-1) unstable; urgency=medium
+
+  [ Alexandre Viau ]
+  * Point Vcs-* urls to salsa.debian.org.
+
+  [ Dmitry Smirnov ]
+  * New upstream release (Closes: #947062).
+    + name space changed to "github.com/go-acme/lego"
+    + Provides: golang-github-go-acme-lego-dev
+  * Lego: Depends += "ca-certificates" (Closes: #856280).
+  * Testsuite: autopkgtest-pkg-go
+  * Standards-Version: 4.4.1
+  * DH to version 12.
+
+ -- Dmitry Smirnov <onlyjob@debian.org>  Sat, 21 Dec 2019 10:13:35 +1100
+
+golang-github-xenolf-lego (0.3.1-5) unstable; urgency=medium
+
+  * Team upload.
+  * Add 0002-Fix-FTBFS-vultr-API.patch (Closes: #869270)
+  * Add 0003-Fix-test-failures-with-go18.patch
+
+ -- Michael Stapelberg <stapelberg@debian.org>  Mon, 24 Jul 2017 07:15:22 +0200
+
+golang-github-xenolf-lego (0.3.1-4) unstable; urgency=medium
+
+  * Team upload.
+  * Replace golang-golang-x-oauth2-dev with golang-golang-x-oauth2-google-dev.
+    (Closes: #844978)
+
+ -- Dr. Tobias Quathamer <toddy@debian.org>  Sat, 19 Nov 2016 16:11:59 +0100
+
+golang-github-xenolf-lego (0.3.1-3) unstable; urgency=medium
+
+  * Team upload.
+  * Add patch for FTBFS on 32 bit architectures. Closes: #834785
+  * Use golang-any instead of golang-go
+
+ -- Dr. Tobias Quathamer <toddy@debian.org>  Mon, 14 Nov 2016 12:45:24 +0100
+
+golang-github-xenolf-lego (0.3.1-2) unstable; urgency=medium
+
+  [ Dmitry Smirnov ]
+  * Team upload.
+  * Remove "googlecloud_test.go" due to network access (Closes: #834713)
+
+  [ Dr. Tobias Quathamer ]
+  * Use debhelper v10
+
+ -- Dr. Tobias Quathamer <toddy@debian.org>  Sun, 13 Nov 2016 12:35:47 +0100
+
+golang-github-xenolf-lego (0.3.1-1) unstable; urgency=medium
+
+  * Initial release (Closes: #813502).
+
+ -- Dmitry Smirnov <onlyjob@debian.org>  Tue, 16 Aug 2016 11:21:01 +1000

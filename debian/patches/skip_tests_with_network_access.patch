@@ -1,0 +1,179 @@
+Last-Update: 2021-09-08, 2023-01-26
+Forwarded: not-needed
+Author: Félix Sipma <onlyjob@debian.org>, Anthony Fok <foka@debian.org>
+Description: disable test which needs network access
+
+--- a/providers/dns/regru/internal/client_test.go
++++ b/providers/dns/regru/internal/client_test.go
+@@ -13,6 +13,7 @@
+ )
+ 
+ func TestRemoveRecord(t *testing.T) {
++	t.Skip("Skip during Debian build (no access to the network)")
+ 	// TODO(ldez): remove skip when the reg.ru API will be fixed.
+ 	t.Skip("there is a bug with the reg.ru API: INTERNAL_API_ERROR: Внутренняя ошибка, status code: 503")
+ 
+@@ -23,6 +24,7 @@
+ }
+ 
+ func TestRemoveRecord_errors(t *testing.T) {
++	t.Skip("Skip during Debian build (no access to the network)")
+ 	testCases := []struct {
+ 		desc     string
+ 		domain   string
+@@ -63,6 +65,7 @@
+ }
+ 
+ func TestAddTXTRecord(t *testing.T) {
++	t.Skip("Skip during Debian build (no access to the network)")
+ 	// TODO(ldez): remove skip when the reg.ru API will be fixed.
+ 	t.Skip("there is a bug with the reg.ru API: INTERNAL_API_ERROR: Внутренняя ошибка, status code: 503")
+ 
+@@ -73,6 +76,7 @@
+ }
+ 
+ func TestAddTXTRecord_errors(t *testing.T) {
++	t.Skip("Skip during Debian build (no access to the network)")
+ 	testCases := []struct {
+ 		desc     string
+ 		domain   string
+--- a/providers/dns/edgedns/edgedns_test.go
++++ b/providers/dns/edgedns/edgedns_test.go
+@@ -151,6 +151,7 @@
+ }
+ 
+ func TestDNSProvider_findZone(t *testing.T) {
++	t.Skip("Skip during Debian build (no access to the network)")
+ 	testCases := []struct {
+ 		desc     string
+ 		domain   string
+--- a/providers/dns/constellix/internal/auth_test.go
++++ b/providers/dns/constellix/internal/auth_test.go
+@@ -28,6 +28,7 @@
+ }
+ 
+ func TestTokenTransport_RoundTrip(t *testing.T) {
++	t.Skip("Skip during Debian build (no access to the network)")
+ 	apiKey := "api"
+ 	secretKey := "secret"
+ 
+--- a/providers/dns/dynu/internal/auth_test.go
++++ b/providers/dns/dynu/internal/auth_test.go
+@@ -26,6 +26,7 @@
+ }
+ 
+ func TestTokenTransport_RoundTrip(t *testing.T) {
++	t.Skip("Skip during Debian build (no access to the network)")
+ 	apiKey := "api"
+ 
+ 	transport, err := NewTokenTransport(apiKey)
+--- a/providers/dns/sakuracloud/client_test.go
++++ b/providers/dns/sakuracloud/client_test.go
+@@ -55,6 +55,7 @@
+ }
+ 
+ func TestDNSProvider_addAndCleanupRecords(t *testing.T) {
++	t.Skip("Skip during Debian build (no access to the network)")
+ 	setupTest(t)
+ 
+ 	config := NewDefaultConfig()
+@@ -88,6 +89,7 @@
+ }
+ 
+ func TestDNSProvider_concurrentAddAndCleanupRecords(t *testing.T) {
++	t.Skip("Skip during Debian build (no access to the network)")
+ 	setupTest(t)
+ 
+ 	dummyRecordCount := 10
+--- a/providers/dns/transip/transip_test.go
++++ b/providers/dns/transip/transip_test.go
+@@ -156,6 +156,7 @@
+ }
+ 
+ func TestDNSProvider_concurrentGetDNSEntries(t *testing.T) {
++	t.Skip("Skip during Debian build (no access to the network)")
+ 	client := &fakeClient{
+ 		getInfoLatency:       50 * time.Millisecond,
+ 		setDNSEntriesLatency: 500 * time.Millisecond,
+@@ -215,6 +216,7 @@
+ }
+ 
+ func TestDNSProvider_concurrentAddDNSEntry(t *testing.T) {
++	t.Skip("Skip during Debian build (no access to the network)")
+ 	client := &fakeClient{
+ 		domainName: "lego.wtf",
+ 	}
+--- a/providers/dns/vinyldns/vinyldns_test.go
++++ b/providers/dns/vinyldns/vinyldns_test.go
+@@ -155,6 +155,7 @@
+ }
+ 
+ func TestDNSProvider_Present(t *testing.T) {
++	t.Skip("Skip during Debian build (no access to the network)")
+ 	testCases := []struct {
+ 		desc    string
+ 		keyAuth string
+@@ -202,6 +203,7 @@
+ }
+ 
+ func TestDNSProvider_CleanUp(t *testing.T) {
++	t.Skip("Skip during Debian build (no access to the network)")
+ 	mux, p := setup(t)
+ 
+ 	mux.Handle("/", newMockRouter().
+--- a/providers/dns/auroradns/auroradns_test.go
++++ b/providers/dns/auroradns/auroradns_test.go
+@@ -145,6 +145,7 @@
+ }
+ 
+ func TestDNSProvider_Present(t *testing.T) {
++	t.Skip("Skip during Debian build (no access to the network)")
+ 	provider, mux := setupTest(t)
+ 
+ 	mux.HandleFunc("/zones", func(w http.ResponseWriter, r *http.Request) {
+@@ -179,6 +180,7 @@
+ }
+ 
+ func TestDNSProvider_CleanUp(t *testing.T) {
++	t.Skip("Skip during Debian build (no access to the network)")
+ 	provider, mux := setupTest(t)
+ 
+ 	mux.HandleFunc("/zones", func(w http.ResponseWriter, r *http.Request) {
+--- a/providers/dns/exoscale/exoscale_test.go
++++ b/providers/dns/exoscale/exoscale_test.go
+@@ -125,6 +125,7 @@
+ }
+ 
+ func TestDNSProvider_FindZoneAndRecordName(t *testing.T) {
++	t.Skip("Skip during Debian build (no access to the network)")
+ 	config := NewDefaultConfig()
+ 	config.APIKey = "example@example.com"
+ 	config.APISecret = "123"
+--- a/providers/dns/linode/linode_test.go
++++ b/providers/dns/linode/linode_test.go
+@@ -142,6 +142,7 @@
+ }
+ 
+ func TestDNSProvider_Present(t *testing.T) {
++	t.Skip("Skip during Debian build (no access to the network)")
+ 	defer envTest.RestoreEnv()
+ 	os.Setenv(EnvToken, "testing")
+ 
+@@ -230,6 +231,7 @@
+ }
+ 
+ func TestDNSProvider_CleanUp(t *testing.T) {
++	t.Skip("Skip during Debian build (no access to the network)")
+ 	defer envTest.RestoreEnv()
+ 	os.Setenv(EnvToken, "testing")
+ 
+--- a/providers/dns/ns1/ns1_test.go
++++ b/providers/dns/ns1/ns1_test.go
+@@ -92,6 +92,7 @@
+ }
+ 
+ func Test_getAuthZone(t *testing.T) {
++	t.Skip("Skip during Debian build (no access to the network)")
+ 	type expected struct {
+ 		AuthZone string
+ 		Error    string

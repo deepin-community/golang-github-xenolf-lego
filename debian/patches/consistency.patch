@@ -1,0 +1,16 @@
+Last-Update: 2021-01-19
+Forwarded: not-needed
+Author: Dmitry Smirnov <onlyjob@debian.org>
+Description: minor consistency correction so our disable-provider patching work.
+
+--- a/providers/dns/dns_providers.go
++++ b/providers/dns/dns_providers.go
+@@ -117,7 +117,7 @@
+ // NewDNSChallengeProviderByName Factory for DNS providers.
+ func NewDNSChallengeProviderByName(name string) (challenge.Provider, error) {
+ 	switch name {
+-	case "acme-dns":
++	case "acmedns":
+ 		return acmedns.NewDNSProvider()
+ 	case "alidns":
+ 		return alidns.NewDNSProvider()

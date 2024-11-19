@@ -1,4 +1,69 @@
 #!/usr/bin/make -f
 
+export DH_GOLANG_GO_GENERATE := 1
+export DH_GOLANG_EXCLUDES := e2e internal/dnsdocs
+export DH_GOLANG_INSTALL_EXTRA := \
+    $(wildcard challenge/dns01/fixtures/*) \
+    $(wildcard internal/dnsdocs/*.tmpl) \
+    $(wildcard providers/dns/*/internal/fixtures/*) \
+    $(wildcard providers/dns/internal/*/fixtures/*) \
+    providers/dns/rfc2136/rfc2136.toml
+
+#   $(wildcard docs/content/dns/*.md) \
+
+nodns= \
+    acmedns \
+    alidns \
+    auroradns \
+    azure \
+    bindman \
+    civo \
+    cloudflare \
+    designate \
+    dnsimple \
+    dnspod \
+    exoscale \
+    fastdns \
+    freemyip \
+    ibmcloud \
+    iij \
+    iijdpf \
+    infoblox \
+    linode \
+    linodev4 \
+    liquidweb \
+    namedotcom \
+    namesilo \
+    ns1 \
+    oraclecloud \
+    porkbun \
+    sakuracloud \
+    scaleway \
+    tencentcloud \
+    transip \
+    vegadns \
+    vinyldns \
+    vkcloud \
+    yandexcloud \
+
 %:
-	dh $@
+	dh $@ --buildsystem=golang --builddirectory=_build
+
+override_dh_clean:
+	dh_clean
+# Remove providers with non-packaged dependencies:
+	$(RM) -r \
+            providers/http/memcached \
+        ;
+
+override_dh_auto_configure:
+	dh_auto_configure
+	set -e -x ;\
+        cd _build/src/github.com/go-acme/lego && \
+        for P in $(nodns); do \
+            perl -ni -E "print unless m{\b$$P\b}" providers/dns/dns_providers.go ;\
+            rm -rf providers/dns/$$P ;\
+        done
+
+override_dh_auto_install:
+	dh_auto_install --destdir=debian/tmp
