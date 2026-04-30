@@ -1,3 +1,4 @@
-skip_tests_with_network_access.patch
-drop_providers.patch
 consistency.patch
+cve_2025_54799.patch
+drop_providers.patch
+skip_tests_with_network_access.patch
